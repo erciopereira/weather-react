@@ -1,11 +1,28 @@
-Este projeto foi iniciado com o Create React App.(https://github.com/facebook/create-react-app).
+## Aplicação Web
 
-Para executar o projeto, é necessário ter instalado o gerenciador de pacotes NPM disponível em https://nodejs.org/en/.
+Sistema WEB para consulta de previsão do tempo desenvolvida em ReactJS e Material-UI
 
-## Iniciando o Servidor
+## Instalando ambiente
 
-Na raiz do projeto, execute o npm start para iniciar o servidor de desenvolvimento. O navegador será aberto automaticamente com a URL do aplicativo criado.
+Instale o ambiente NodeJS.
+https://nodejs.org/en/
+
+## Baixando e instalando o projeto
+
+Clone ou baixe esse projeto
+
+Inicialize um ambiente de linha de comando na pasta raiz do projeto
+
+Realize a instalação da dependência
+
+### `npm install`
+
+## Executando a aplicação
+
+Utilize o mesmo ambiente de linha de comando e o comando:
 
 ### `npm start`
 
-O projeto ira roda em uma porta local. http://localhost:3000/
+A Aplicação irá rodar na porta local 3000.
+
+
