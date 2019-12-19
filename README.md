@@ -19,7 +19,7 @@ Realize a instalação da dependência
 
 ## Executando a aplicação
 
-Utilize o mesmo ambiente de linha de comando e o comando:
+Utilize o mesmo ambiente de linha de comando para executar
 
 ### `npm start`
 
