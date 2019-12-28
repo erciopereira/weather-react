@@ -85,7 +85,6 @@ const Home = () => {
     }, [])
 
     useEffect(() => {
-        console.log('passou aqui')
         setVerify(false)
         if (favorite.length === 0) {
             return
