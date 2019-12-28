@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import {
     Paper, FormControl, MenuItem, TextField, Typography,
-    ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary
+    ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary, Fab
 } from '@material-ui/core'
 import { Autocomplete } from '@material-ui/lab'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import FavoriteIcon from '@material-ui/icons/Favorite'
 import { Area } from './styled'
 import WeatherIcon from 'react-icons-weather'
 import cities from 'cities.json'
@@ -22,9 +23,10 @@ const Home = () => {
     const [weatherCity, setWeatherCity] = useState([])
     const [result, setResult] = useState(true)
     const [forecast, setForecast] = useState([])
-    const [favorita, setFavorita] = useState([])
+    const [favorite, setFavorite] = useState([])
     const [notMonitored, setNotMonitored] = useState(false)
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = useState(false);
+    const [verify, setVerify] = useState(false)
 
     useEffect(() => {
         const getStates = async () => {
@@ -69,12 +71,33 @@ const Home = () => {
             return
         }
         else {
-            const newArray = weatherCity.daily.data.filter((i, k) =>
-                k > 0
-            )
+            const newArray = weatherCity.daily.data.filter((i, k) => k > 0)
             setForecast(newArray)
         }
     }, [weatherCity, selectCity])
+
+    useEffect(() => {
+        if (localStorage.length === 0) {
+            return
+        } else {
+            setFavorite(JSON.parse(localStorage.getItem('cities')))
+        }
+    }, [])
+
+    useEffect(() => {
+        console.log('passou aqui')
+        setVerify(false)
+        if (favorite.length === 0) {
+            return
+        } else {
+            const favor = favorite.filter((i, k) => i.city === selectCity)
+            if (favor.length === 0) {
+                return
+            } else {
+                setVerify(true)
+            }
+        }
+    }, [selectCity,favorite])
 
     const formatDate = (date) => {
         let cDate = new Date(date * 1000)
@@ -97,6 +120,33 @@ const Home = () => {
     const handleChange = panel => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
+
+    const addFav = () => {
+        if (localStorage.length === 0) {
+            var citiesFav =
+                [
+                    { city: selectCity }
+                ]
+                ;
+
+            localStorage.cities = JSON.stringify(citiesFav)
+        } else {
+            var addCity = JSON.parse(localStorage.getItem('cities'))
+            addCity.push({
+                city: selectCity
+            })
+            localStorage.cities = JSON.stringify(addCity)
+        }
+        setVerify(true)
+    }
+
+    const removeFav = () =>{
+        const index = favorite.findIndex((i, k) => i.city === selectCity)
+        favorite.splice(index,1)
+        localStorage.clear()
+        localStorage.cities = JSON.stringify(favorite)
+        setVerify(false)
+    }
 
     return (
         <Area>
@@ -127,6 +177,20 @@ const Home = () => {
                         )}
                     />
                 </Paper >
+                <Paper className="favorite--area">
+                    <FormControl className="select--favorite">
+                        <TextField
+                            select
+                            label="Cidades Favoritas"
+                            variant="outlined"
+                            onChange={e => setSelectCity(e.target.value)}
+                        >
+                            {favorite.map((i, k) =>
+                                <MenuItem key={k} value={i.city}>{i.city}</MenuItem>
+                            )}
+                        </TextField>
+                    </FormControl>
+                </Paper>
                 {!result &&
                     <Paper className="result--area">
                         <div className="result--info">
@@ -149,6 +213,20 @@ const Home = () => {
                                 <li>Chuva {(parseInt(weatherCity.currently.precipProbability * 100))}%</li>
                             </ul>
                         </div>
+                        {verify &&
+                            <div className="favorite--button">
+                                <Fab onClick={removeFav} color="secondary">
+                                    <FavoriteIcon  />
+                                </Fab>
+                            </div>
+                        }
+                        {!verify &&
+                            <div className="favorite--button">
+                                <Fab onClick={addFav}>
+                                    <FavoriteIcon color="disabled" />
+                                </Fab>
+                            </div>
+                        }
                         <Paper className="result--forecast">
                             <Typography className="title--forecast" variant="h5" align="center">Previsão para os próximos dias</Typography>
                             {forecast.map((i, k) =>
@@ -177,7 +255,6 @@ const Home = () => {
                                                 <li>Vento {parseInt(i.windSpeed)} km/h</li>
                                                 <li>Chuva {(parseInt(i.precipProbability * 100))}%</li>
                                             </ul>
-
                                         </div>
                                     </ExpansionPanelDetails>
                                 </ExpansionPanel>
@@ -186,7 +263,7 @@ const Home = () => {
                     </Paper>
                 }
             </PageContainer>
-        </Area>
+        </Area >
     )
 }
 

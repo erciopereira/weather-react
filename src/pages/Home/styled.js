@@ -18,6 +18,16 @@ export const Area = styled.div`
 
     }
 }
+.favorite--area{
+    padding: 20px;
+    margin-top: 20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    .select--favorite{
+        min-width: 100%;
+    }
+}
 
 .result--info{
     padding: 20px;
@@ -65,6 +75,10 @@ export const Area = styled.div`
         font-weight:500;
         padding: 0px 10px;
     }
+}
+.favorite--button{
+    text-align:center;
+    margin-bottom: 20px;
 }
 .result--forecast{
     
