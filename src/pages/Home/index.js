@@ -6,7 +6,10 @@ import {
 import { Autocomplete } from '@material-ui/lab'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import FavoriteIcon from '@material-ui/icons/Favorite'
-import { Area } from './styled'
+import {
+    LineChart, Line, XAxis, YAxis, Tooltip, Legend, LabelList
+} from 'recharts';
+import { PageArea } from './styled'
 import WeatherIcon from 'react-icons-weather'
 import cities from 'cities.json'
 import useApi from '../../helpers/APIs'
@@ -24,9 +27,9 @@ const Home = () => {
     const [result, setResult] = useState(true)
     const [forecast, setForecast] = useState([])
     const [favorite, setFavorite] = useState([])
-    const [notMonitored, setNotMonitored] = useState(false)
     const [expanded, setExpanded] = useState(false);
     const [verify, setVerify] = useState(false)
+    const [chart, setChart] = useState([])
 
     useEffect(() => {
         const getStates = async () => {
@@ -37,7 +40,6 @@ const Home = () => {
     }, [])
 
     useEffect(() => {
-        setCity([])
         const getCity = async (idUf) => {
             const clist = await api.getCity(idUf)
             setCity(clist)
@@ -52,7 +54,6 @@ const Home = () => {
             const latlng = cities.filter(d => d.name === selectCity)
             if (latlng.length === 0) {
                 alert("Cidade não monitorada")
-                setNotMonitored(true)
             } else {
                 const lat = latlng[0]['lat']
                 const lng = latlng[0]['lng']
@@ -96,7 +97,24 @@ const Home = () => {
                 setVerify(true)
             }
         }
-    }, [selectCity,favorite])
+    }, [selectCity, favorite])
+
+    useEffect(() => {
+        if (forecast.length === 0) {
+            return
+        }
+        else {
+
+            let data = forecast.map((i) => {
+                return {
+                    day: formatDay(i.time),
+                    Max: parseInt(i.temperatureHigh),
+                    Min: parseInt(i.temperatureLow),
+                }
+            })
+            setChart(data)
+        }
+    }, [forecast])
 
     const formatDate = (date) => {
         let cDate = new Date(date * 1000)
@@ -114,6 +132,15 @@ const Home = () => {
         let cYear = cDate.getFullYear()
 
         return `${dayWeek[cDayWeek]}, ${cDay} de ${months[cMonth]} de ${cYear}`
+    }
+
+    const formatDay = (date) => {
+        let cDate = new Date(date * 1000)
+
+        let dayWeek = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']
+        let cDayWeek = cDate.getDay()
+
+        return `${dayWeek[cDayWeek]}`
     }
 
     const handleChange = panel => (event, isExpanded) => {
@@ -139,16 +166,39 @@ const Home = () => {
         setVerify(true)
     }
 
-    const removeFav = () =>{
+    const removeFav = () => {
         const index = favorite.findIndex((i, k) => i.city === selectCity)
-        favorite.splice(index,1)
+        favorite.splice(index, 1)
         localStorage.clear()
         localStorage.cities = JSON.stringify(favorite)
         setVerify(false)
     }
 
+    const InfoTips = () =>{
+        if (weatherCity.currently.icon === 'rain' && (formatDay(weatherCity.currently.time) === 'Sábado' || formatDay(weatherCity.currently.time) === 'Domingo')){
+            let weekendRain = 'Oba! É final de semana. Pena que o dia não parece muito bonito. Aproveite para colocar em dia aquela série preferida'
+            return weekendRain 
+        }
+        else if (weatherCity.currently.icon !== 'rain' && (formatDay(weatherCity.currently.time) === 'Sábado' || formatDay(weatherCity.currently.time) === 'Domingo')) {
+            let weekendGood = 'Oba! É final de semana. Aproveite que o dia está sem previsão de chuva para dar um passeio'
+            return weekendGood
+        }
+        else if (weatherCity.currently.icon === 'rain' && (formatDay(weatherCity.currently.time) !== 'Sábado' || formatDay(weatherCity.currently.time) !== 'Domingo')){
+            let weekRain = 'Poxa, parece que vai chover. Não esqueça de levar o guarda-chuva'
+            return weekRain
+        }
+        else if (weatherCity.currently.icon !== 'rain' && (formatDay(weatherCity.currently.time) !== 'Sábado' || formatDay(weatherCity.currently.time) !== 'Domingo')){
+            let weekGood = 'Oba! Sem previsão de chuva. O que acha de ir para o trabalho de bike?'
+            return weekGood
+        }
+    }
+
+    stateLoc.sort((a, b) => {
+        return (a.nome > b.nome) ? 1 : ((b.nome > a.nome) ? -1 : 0);
+    })
+
     return (
-        <Area>
+        <PageArea>
             <PageContainer>
                 <Paper className="paper--search" position="static" color="inherit">
                     <FormControl className="select--state">
@@ -215,7 +265,7 @@ const Home = () => {
                         {verify &&
                             <div className="favorite--button">
                                 <Fab onClick={removeFav} color="secondary">
-                                    <FavoriteIcon  />
+                                    <FavoriteIcon />
                                 </Fab>
                             </div>
                         }
@@ -226,6 +276,9 @@ const Home = () => {
                                 </Fab>
                             </div>
                         }
+                        <div className="infoTips">
+                            <Typography variant="h6" align="center">{InfoTips()}</Typography>
+                        </div>
                         <Paper className="result--forecast">
                             <Typography className="title--forecast" variant="h5" align="center">Previsão para os próximos dias</Typography>
                             {forecast.map((i, k) =>
@@ -235,7 +288,7 @@ const Home = () => {
                                     >
                                         <div className="expand--false">
                                             <Typography className="forecast--date">{formatDate(i.time)}</Typography>
-                                            <Typography variant="h6" className="temp--max--min">
+                                            <Typography variant="h6" className="temp--max--min" color="primary">
                                                 <WeatherIcon className="icon" name="darksky" iconId={i.icon} flip="horizontal" rotate="90" />
                                                 <span>Máxima {parseInt(i.temperatureHigh)} ºC</span>
                                                 <span>Mínima {parseInt(i.temperatureLow)} ºC</span>
@@ -259,10 +312,34 @@ const Home = () => {
                                 </ExpansionPanel>
                             )}
                         </Paper>
+                        <Paper align="center">
+                            <Typography className="title--chart" variant="h6" align="center">
+                                Variação da temperatura durante a semana
+                            </Typography>
+                            <LineChart
+                                width={800}
+                                height={250}
+                                data={chart}
+                                margin={{
+                                    top: 40, bottom: 40, right: 50
+                                }}
+                                >
+                                <XAxis dataKey="day" />
+                                <YAxis />
+                                <Tooltip />
+                                <Legend wrapperStyle={{bottom: 15}}/>
+                                <Line type="monotone" dataKey="Max" stroke="#8884d8" >
+                                    <LabelList dataKey="Max" position="insideTopLeft"/>
+                                </Line>
+                                <Line type="monotone" dataKey="Min" stroke="#82ca9d" >
+                                    <LabelList dataKey="Min" position="insideTopLeft"/>
+                                </Line>
+                            </LineChart>
+                        </Paper>
                     </Paper>
                 }
             </PageContainer>
-        </Area >
+        </PageArea >
     )
 }
 
