@@ -112,6 +112,9 @@ export const PageArea = styled.div`
             align-items:center;
             justify-content:center;
         }
+        .MuiIconButton-root{
+            padding: 0px;
+        }
         .expand--true{
                 ul{
                     display:flex;
@@ -199,6 +202,7 @@ export const PageArea = styled.div`
         flex-direction: column;
         align-items:center;
         justify-content:center;
+        margin-right: 0px;
     }
 }
 `
