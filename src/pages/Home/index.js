@@ -7,7 +7,7 @@ import { Autocomplete } from '@material-ui/lab'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import {
-    LineChart, Line, XAxis, YAxis, Tooltip, Legend, LabelList
+    LineChart, Line, XAxis, YAxis, Tooltip, Legend, LabelList, ResponsiveContainer,
 } from 'recharts';
 import { PageArea } from './styled'
 import WeatherIcon from 'react-icons-weather'
@@ -174,20 +174,20 @@ const Home = () => {
         setVerify(false)
     }
 
-    const InfoTips = () =>{
-        if (weatherCity.currently.icon === 'rain' && (formatDay(weatherCity.currently.time) === 'Sábado' || formatDay(weatherCity.currently.time) === 'Domingo')){
+    const InfoTips = () => {
+        if (weatherCity.currently.icon === 'rain' && (formatDay(weatherCity.currently.time) === 'Sábado' || formatDay(weatherCity.currently.time) === 'Domingo')) {
             let weekendRain = 'Oba! É final de semana. Pena que o dia não parece muito bonito. Aproveite para colocar em dia aquela série preferida'
-            return weekendRain 
+            return weekendRain
         }
         else if (weatherCity.currently.icon !== 'rain' && (formatDay(weatherCity.currently.time) === 'Sábado' || formatDay(weatherCity.currently.time) === 'Domingo')) {
             let weekendGood = 'Oba! É final de semana. Aproveite que o dia está sem previsão de chuva para dar um passeio'
             return weekendGood
         }
-        else if (weatherCity.currently.icon === 'rain' && (formatDay(weatherCity.currently.time) !== 'Sábado' || formatDay(weatherCity.currently.time) !== 'Domingo')){
+        else if (weatherCity.currently.icon === 'rain' && (formatDay(weatherCity.currently.time) !== 'Sábado' || formatDay(weatherCity.currently.time) !== 'Domingo')) {
             let weekRain = 'Poxa, parece que vai chover. Não esqueça de levar o guarda-chuva'
             return weekRain
         }
-        else if (weatherCity.currently.icon !== 'rain' && (formatDay(weatherCity.currently.time) !== 'Sábado' || formatDay(weatherCity.currently.time) !== 'Domingo')){
+        else if (weatherCity.currently.icon !== 'rain' && (formatDay(weatherCity.currently.time) !== 'Sábado' || formatDay(weatherCity.currently.time) !== 'Domingo')) {
             let weekGood = 'Oba! Sem previsão de chuva. O que acha de ir para o trabalho de bike?'
             return weekGood
         }
@@ -316,25 +316,27 @@ const Home = () => {
                             <Typography className="title--chart" variant="h6" align="center">
                                 Variação da temperatura durante a semana
                             </Typography>
-                            <LineChart
-                                width={800}
-                                height={250}
-                                data={chart}
-                                margin={{
-                                    top: 40, bottom: 40, right: 50
-                                }}
-                                >
-                                <XAxis dataKey="day" />
-                                <YAxis />
-                                <Tooltip />
-                                <Legend wrapperStyle={{bottom: 15}}/>
-                                <Line type="monotone" dataKey="Max" stroke="#8884d8" >
-                                    <LabelList dataKey="Max" position="insideTopLeft"/>
-                                </Line>
-                                <Line type="monotone" dataKey="Min" stroke="#82ca9d" >
-                                    <LabelList dataKey="Min" position="insideTopLeft"/>
-                                </Line>
-                            </LineChart>
+                            <div className="chart--area">
+                                <ResponsiveContainer width="100%" height="100%">
+                                    <LineChart
+                                        data={chart}
+                                        margin={{
+                                            top: 40, bottom: 40, right: 50
+                                        }}
+                                    >
+                                        <XAxis dataKey="day" />
+                                        <YAxis />
+                                        <Tooltip />
+                                        <Legend wrapperStyle={{ bottom: 15 }} />
+                                        <Line type="monotone" dataKey="Max" stroke="#8884d8" >
+                                            <LabelList dataKey="Max" position="insideBottomLeft" />
+                                        </Line>
+                                        <Line type="monotone" dataKey="Min" stroke="#82ca9d" >
+                                            <LabelList dataKey="Min" position="insideTopLeft" />
+                                        </Line>
+                                    </LineChart>
+                                </ResponsiveContainer>
+                            </div>
                         </Paper>
                     </Paper>
                 }

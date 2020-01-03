@@ -136,5 +136,67 @@ export const PageArea = styled.div`
         .title--chart{
             padding-top: 20px;
         }
+        .chart--area{
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            height: 300px;
+            width: 100%;
+        }
     }
+
+@media only screen and (max-width:900px){
+
+    .result--area .result--forecast .expand--false .forecast--date {
+        margin-left: 10px;
+    }
+    .result--area .result--forecast .expand--false .temp--max--min {
+        margin-right: 10px;
+    }
+}
+@media only screen and (max-width:860px){
+
+    .result--area .result--info{
+        flex-direction:column;
+    }
+
+}
+
+@media only screen and (max-width:770px){
+    .result--area .result--forecast .expand--true ul {
+        flex-direction: column;
+        align-items:center;
+        justify-content:center;   
+    }
+
+    .result--area .result--forecast .expand--true ul li{
+        padding: 10px 0px;
+    }
+}
+
+@media only screen and (max-width:745px){
+    .result--area .result--forecast .expand--false {
+        flex-direction: column;
+        align-items:center;
+        justify-content:center;
+    }
+    .paper--search{
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width:510px){
+    .result--area .result--other--info ul{
+        flex-direction: column;
+        align-items:center;
+        justify-content:center;
+    }
+    .result--area .result--other--info ul li{
+        padding: 10px 0px;
+    }
+}
+
+
+
+
 `
