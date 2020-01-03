@@ -194,9 +194,11 @@ export const PageArea = styled.div`
     .result--area .result--other--info ul li{
         padding: 10px 0px;
     }
+    .result--area .result--forecast .expand--false .temp--max--min{
+        display:flex;
+        flex-direction: column;
+        align-items:center;
+        justify-content:center;
+    }
 }
-
-
-
-
 `

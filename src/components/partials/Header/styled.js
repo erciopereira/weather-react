@@ -42,4 +42,14 @@ ul li{
     font-weight:500;
     padding: 0px 10px;
 }
+
+@media only screen and (max-width:470px){
+    ul {
+        display:block;
+        text-align:center;
+    }
+    ul li{
+        padding: 10px 0px;
+    }
+}
 `
