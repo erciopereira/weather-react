@@ -9,7 +9,7 @@ export const Area = styled.div`
     color: #FFF;
     font-weight:500;
 }
-.teste{
+.blumenau--info{
     display:flex;
     align-items:center;
     justify-content:center;

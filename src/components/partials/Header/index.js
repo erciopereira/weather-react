@@ -56,7 +56,7 @@ const Header = () => {
                         <Typography className="date--blumenau" variant="subtitle2" align="center">
                             {formatDate(blumenau.currently.time)}
                         </Typography>
-                        <div className="teste">
+                        <div className="blumenau--info">
                             <Typography variant="h3" align="center">
                                 <WeatherIcon className="icon" name="darksky" iconId={blumenau.currently.icon} flip="horizontal" rotate="90" />
                                 <span className="temp--blumenau">{parseInt(blumenau.currently.temperature)} ºC</span>
