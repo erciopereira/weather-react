@@ -4,7 +4,23 @@ Sistema WEB para consulta de previsão do tempo desenvolvida em ReactJS e Materi
 
 ## Funcionalidades
 
+Tela inicial que mostra no cabeçalho fixo o clima na cidade de blumenau
 ![](/src/images/print1.jpg)
+
+Opção para selecionar estados e cidades. 
+![](/src/images/print2.jpg)
+
+Previsão da cidade selecionada com dicas do que fazer dependendo do dia da semana e condições climáticas.
+![](/src/images/print3.jpg)
+
+Opção para favoritar a cidade usando localStorage
+![](/src/images/print4.jpg)
+
+Previção para os próximos 7 dias com opção de expandir para ver mais detalhes.
+![](/src/images/print5.jpg)
+
+Gráfico que mostra a variação da temperatura durante a semana
+![](/src/images/print6.jpg)
 
 ## Instalando ambiente
 
