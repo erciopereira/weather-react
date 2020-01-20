@@ -12,7 +12,7 @@
 
 </br>
 <p align="center">
-  Tela inicial que mostra no cabeçalho o clima na cidade de blumenau
+  Tela inicial que mostra no cabeçalho o clima na cidade de Blumenau
 </p>
 
 ![](/src/images/print1.jpg)
