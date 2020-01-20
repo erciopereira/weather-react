@@ -2,6 +2,10 @@
 
 Sistema WEB para consulta de previsão do tempo desenvolvida em ReactJS e Material-UI
 
+## Funcionalidades
+
+![](/src/images/print1)
+
 ## Instalando ambiente
 
 Instale o ambiente [NodeJS](https://nodejs.org/en/).
