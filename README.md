@@ -10,41 +10,54 @@
   Funcionalidades
 </h2>
 
+</br>
 <p align="center">
   Tela inicial que mostra no cabeçalho o clima na cidade de blumenau
 </p>
 
 ![](/src/images/print1.jpg)
 
+#
+</br> 
 <p align="center">
   Opção para selecionar estados e cidades.
- </p>
+</p>
  
 ![](/src/images/print2.jpg)
 
+#
+</br>
 <p align="center">
   Previsão da cidade selecionada com dicas do que fazer dependendo do dia da semana e condições climáticas.
 </p>
 
 ![](/src/images/print3.jpg)
 
+#
+</br>
 <p align="center">
   Opção para favoritar a cidade usando localStorage
 </p>
 
 ![](/src/images/print4.jpg)
 
+#
+</br>
 <p align="center">
   Previsão para os próximos 7 dias com opção de expandir para ver mais detalhes.
 </p>
 
 ![](/src/images/print5.jpg)
 
+#
+</br>
 <p align="center">
   Gráfico que mostra a variação da temperatura durante a semana
 </p>
 
 ![](/src/images/print6.jpg)
+
+</br>
 
 ## Instalando ambiente
 
