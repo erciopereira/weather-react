@@ -4,7 +4,7 @@ Sistema WEB para consulta de previsão do tempo desenvolvida em ReactJS e Materi
 
 ## Funcionalidades
 
-![](/src/images/print1)
+![](/src/images/print1.jpg)
 
 ## Instalando ambiente
 
