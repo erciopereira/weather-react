@@ -1,25 +1,49 @@
-## Aplicação Web
+<h1 align="center">
+  Aplicação Web
+</h1>
 
-Sistema WEB para consulta de previsão do tempo desenvolvida em ReactJS e Material-UI
+<p align="center">
+ Sistema WEB para consulta de previsão do tempo desenvolvida em ReactJS e Material-UI
+</p>
 
-## Funcionalidades
+<h1 align="center">
+  Funcionalidades
+</h2>
 
-#Tela inicial que mostra no cabeçalho o clima na cidade de blumenau
+<h3 align="center">
+  Tela inicial que mostra no cabeçalho o clima na cidade de blumenau
+</h3>
+
 ![](/src/images/print1.jpg)
 
-#Opção para selecionar estados e cidades. 
+<h3 align="center">
+  Opção para selecionar estados e cidades.
+ </h3>
+ 
 ![](/src/images/print2.jpg)
 
-#Previsão da cidade selecionada com dicas do que fazer dependendo do dia da semana e condições climáticas.
+<h3 align="center">
+  Previsão da cidade selecionada com dicas do que fazer dependendo do dia da semana e condições climáticas.
+</h3>
+
 ![](/src/images/print3.jpg)
 
-#Opção para favoritar a cidade usando localStorage
+<h3 align="center">
+  Opção para favoritar a cidade usando localStorage
+</h3>
+
 ![](/src/images/print4.jpg)
 
-#Previção para os próximos 7 dias com opção de expandir para ver mais detalhes.
+<h3 align="center">
+  Previsão para os próximos 7 dias com opção de expandir para ver mais detalhes.
+</h3>
+
 ![](/src/images/print5.jpg)
 
-#Gráfico que mostra a variação da temperatura durante a semana
+<h3 align="center">
+  Gráfico que mostra a variação da temperatura durante a semana
+</h3>
+
 ![](/src/images/print6.jpg)
 
 ## Instalando ambiente
